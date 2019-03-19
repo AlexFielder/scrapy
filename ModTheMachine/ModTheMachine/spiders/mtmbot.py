@@ -17,6 +17,8 @@ class MtmbotSpider(scrapy.Spider):
         #response.xpath("//div/div[2]/p[1]/span[1]/a[1]/text()").extract()
         #loop to
         #response.xpath("//div/div[2]/p[1]/span[1]/a[#]/text()").extract()
+        #this gets the text from the footers:
+        #response.css('.post-footers *::text').getall()
         #comments = response.css('.comments-content::text').extract()
        
         #Give the extracted content row wise
