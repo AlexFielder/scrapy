@@ -1,0 +1,3 @@
+[
+{"title": "Automate creation of Named Geometry", "codeSample": "' Select Face before running this code\r\nDim iLogicAuto = iLogicVb.Automation\r\n\r\nDim namedEntities = iLogicAuto.GetNamedEntities(ThisDoc.Document)\r\n\r\nDim f = ThisDoc.Document.SelectSet(1)\r\n\r\nnamedEntities.SetName(f, \"MyNewFace\")", "created_at": "March 06, 2019", "footers": "Posted at 10:08 AM in "}
+]

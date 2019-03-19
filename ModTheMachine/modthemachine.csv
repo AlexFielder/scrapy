@@ -1,0 +1,9 @@
+title,codeSample,created_at,footers
+Automate creation of Named Geometry,"' Select Face before running this code
+Dim iLogicAuto = iLogicVb.Automation
+
+Dim namedEntities = iLogicAuto.GetNamedEntities(ThisDoc.Document)
+
+Dim f = ThisDoc.Document.SelectSet(1)
+
+namedEntities.SetName(f, ""MyNewFace"")","March 06, 2019",Posted at 10:08 AM in 
