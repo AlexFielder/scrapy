@@ -40,44 +40,9 @@ class MtmbotSpider(scrapy.Spider):
 
     def parse(self, response):
         #Extracting the content using css selectors
-        titles = response.css('.entry-header::text').extract()
-        codeSamples = response.css('pre::text').extract()
-        times = response.css('.date-header::text').extract()
-        # footers = response.css('.post-footers a::text').getall() #response.css('.post-footers::text').extract()
-        footerscoll = response.css('.post-footers a::text').extract()
-        # footers = response.css('.post-footers a::text').extract()
-        #this gets the xpath text from the 'post footers' section:
-        #response.xpath("//div/div[2]/p[1]/span[1]/a[1]/text()").extract()
-        #loop to
-        #response.xpath("//div/div[2]/p[1]/span[1]/a[#]/text()").extract()
-        #this gets the text from the footers:
-        #response.css('.post-footers *::text').getall()
-        #comments = response.css('.comments-content::text').extract()
-        
-        footers = ""
-        # footers = response.xpath('//div/div[2]/p[1]/span[1]')
-        # for div in response.xpath('//div/div[2]/p[1]/span[1]'):
-        #     print(div.xpath('./a'))
-        # # print(footerscoll)
-        footers = ", ".join(a.strip() for a in response.css('.post-footers a::text').extract())
-        # for footer in footerscoll:
-        #     print(footer)
-        #     footers = footers + footer
-
-        print(footers)
-
-        # for i in range(1, 20):
-        #     if response.xpath("//div/div[2]/p[1]/span[1]/a[#]/text()").extract() != "":
-        #         footers = footers + response.xpath("//div/div[2]/p[1]/span[1]/a[[%s]]/text()").extract()
-        #Give the extracted content row wise
-        # for item in zip(titles,codeSamples,times,footers):
-            #create a dictionary to store the scraped info
         yield {
-            'title' : response.css('.entry-header::text').extract() #titles, #item[0],
-            'codeSample' : response.css('pre::text').extract() #codeSamples, #item[1],
-            'created_at' : response.css('.date-header::text').extract() #times, #item[2],
-            'footers' : ", ".join(a.strip() for a in response.css('.post-footers a::text').extract()) #footers, #item[3],
+            'created_at' : response.css('.date-header::text').extract(),
+            'title' : response.css('.entry-header::text').extract(),
+            'codeSample' : response.css('pre::text').extract(),
+            'footers' : ", ".join(a.strip() for a in response.css('.post-footers a::text').extract()),
         }
-
-            #yield or give the scraped info to scrapy
-            # yield scraped_info
