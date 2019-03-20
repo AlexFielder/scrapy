@@ -42,7 +42,7 @@ class MtmbotSpider(scrapy.Spider):
         #Extracting the content using css selectors
         yield {
             'created_at' : response.css('.date-header::text').extract(),
+            'footers' : ", ".join(a.strip() for a in response.css('.post-footers a::text').extract()),
             'title' : response.css('.entry-header::text').extract(),
             'codeSample' : response.css('pre::text').extract(),
-            'footers' : ", ".join(a.strip() for a in response.css('.post-footers a::text').extract()),
         }
