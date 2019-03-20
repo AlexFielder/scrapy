@@ -106,7 +106,7 @@ class MtmbotSpider(scrapy.Spider):
             'https://modthemachine.typepad.com\my_weblog\2018\10\troubleshooting-debugging.html',
             'https://modthemachine.typepad.com\my_weblog\2019\03\accessing-iproperties.html',
             'https://modthemachine.typepad.com\my_weblog\2019\03\automate-creation-of-named-geometry.html',
-
+            #recent posts:
             # 'https://modthemachine.typepad.com/my_weblog/2015/09/add-control-to-toolbar-panel.html',
             # 'https://modthemachine.typepad.com/my_weblog/2015/09/extrude-profile-with-hole.html',
             # 'https://modthemachine.typepad.com/my_weblog/2015/09/fusion-360-hackathon-qa-1-2.html',
@@ -137,7 +137,7 @@ class MtmbotSpider(scrapy.Spider):
 
     # allowed_domains = ['https://modthemachine.typepad.com/']
     start_urls = ['https://modthemachine.typepad.com//my_weblog'] #//2019//03//automate-creation-of-named-geometry.html']
-
+    #works but only for recent posts:
     # def parse(self, response):
     #     #Extracting the content using css selectors
     #     yield {
