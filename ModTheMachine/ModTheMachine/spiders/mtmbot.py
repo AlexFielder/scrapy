@@ -73,10 +73,10 @@ class MtmbotSpider(scrapy.Spider):
         # for item in zip(titles,codeSamples,times,footers):
             #create a dictionary to store the scraped info
         yield {
-            'title' : titles, #item[0],
-            'codeSample' : codeSamples, #item[1],
-            'created_at' : times, #item[2],
-            'footers' : footers, #item[3],
+            'title' : response.css('.entry-header::text').extract() #titles, #item[0],
+            'codeSample' : response.css('pre::text').extract() #codeSamples, #item[1],
+            'created_at' : response.css('.date-header::text').extract() #times, #item[2],
+            'footers' : ", ".join(a.strip() for a in response.css('.post-footers a::text').extract()) #footers, #item[3],
         }
 
             #yield or give the scraped info to scrapy
