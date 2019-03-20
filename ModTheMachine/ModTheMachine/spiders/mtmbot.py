@@ -51,9 +51,12 @@ class MtmbotSpider(scrapy.Spider):
         #this gets the text from the footers:
         #response.css('.post-footers *::text').getall()
         #comments = response.css('.comments-content::text').extract()
+        
+        footers = ""
+
         for i in range(1, 20):
-            if response.xpath("//div/div[2]/p[1]/span[1]/a[" & i & "]/text()").extract() != "":
-                footers += response.xpath("//div/div[2]/p[1]/span[1]/a[" & i & "]/text()").extract()
+            if response.xpath("//div/div[2]/p[1]/span[1]/a[" + str(i) + "]/text()").extract() != "":
+                footers = footers + response.xpath("//div/div[2]/p[1]/span[1]/a[" + str(i) + "]/text()").extract()
         #Give the extracted content row wise
         for item in zip(titles,codeSamples,times,footers):
             #create a dictionary to store the scraped info
