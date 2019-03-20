@@ -43,7 +43,7 @@ class MtmbotSpider(scrapy.Spider):
         titles = response.css('.entry-header::text').extract()
         codeSamples = response.css('pre::text').extract()
         times = response.css('.date-header::text').extract()
-        footers = response.css('.post-footers::text').extract()
+        footers = response.css('.post-footers *::text').getall() #response.css('.post-footers::text').extract()
         #this gets the xpath text from the 'post footers' section:
         #response.xpath("//div/div[2]/p[1]/span[1]/a[1]/text()").extract()
         #loop to
