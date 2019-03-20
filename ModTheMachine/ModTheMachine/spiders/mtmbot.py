@@ -146,7 +146,12 @@ class MtmbotSpider(scrapy.Spider):
     #         'title' : response.css('.entry-header::text').extract(),
     #         'codeSample' : response.css('pre::text').extract(),
     #     }
+    #common theme for both posts below is background is set to #eeeeee
+#xpath from this 2009 post: https://modthemachine.typepad.com/my_weblog/2009/02/setting-the-weight-for-ipart-members.html/
+# //*[@id="entry-62662269"]/div/div[1]/div/div[1] & //*[@id="entry-62662269"]/div/div[1]/div/div[2]
 
+#xpath from this 2013 post: https://modthemachine.typepad.com/my_weblog/2012/05/creating-geometric-constraints-in-a-sketch.html
+# //*[@id="entry-6a00e553fcbfc688340163057bb06a970d"]/div/div[1]/div/p[11]
     def parse(self, response):
         #Extracting the content using css selectors
         yield {
