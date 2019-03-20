@@ -33,7 +33,7 @@ class MtmbotSpider(scrapy.Spider):
             'https://modthemachine.typepad.com/my_weblog/2019/03/automate-creation-of-named-geometry.html',
         ]
         for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse)
+            yield scrapy.Request(url=url, dont_filter=True, callback=self.parse)
 
     # allowed_domains = ['https://modthemachine.typepad.com/']
     start_urls = ['https://modthemachine.typepad.com//my_weblog'] #//2019//03//automate-creation-of-named-geometry.html']
@@ -43,8 +43,9 @@ class MtmbotSpider(scrapy.Spider):
         titles = response.css('.entry-header::text').extract()
         codeSamples = response.css('pre::text').extract()
         times = response.css('.date-header::text').extract()
-        footers = response.css('.post-footers *::text').getall() #response.css('.post-footers::text').extract()
-        # footers = response.css('.post-footers::text').extract()
+        # footers = response.css('.post-footers a::text').getall() #response.css('.post-footers::text').extract()
+        footerscoll = response.css('.post-footers a::text').extract()
+        # footers = response.css('.post-footers a::text').extract()
         #this gets the xpath text from the 'post footers' section:
         #response.xpath("//div/div[2]/p[1]/span[1]/a[1]/text()").extract()
         #loop to
@@ -53,12 +54,15 @@ class MtmbotSpider(scrapy.Spider):
         #response.css('.post-footers *::text').getall()
         #comments = response.css('.comments-content::text').extract()
         
-        # footers = ""
+        footers = ""
         # footers = response.xpath('//div/div[2]/p[1]/span[1]')
+        # for div in response.xpath('//div/div[2]/p[1]/span[1]'):
+        #     print(div.xpath('./a'))
         # # print(footerscoll)
+        footers = ", ".join(a.strip() for a in response.css('.post-footers a::text').extract())
         # for footer in footerscoll:
-        #     # if footer.xpath('//text()').extract() != "":
-        #     footers = footers + str(footer.xpath('//text()').extract()[1].strip())
+        #     print(footer)
+        #     footers = footers + footer
 
         print(footers)
 
@@ -66,14 +70,14 @@ class MtmbotSpider(scrapy.Spider):
         #     if response.xpath("//div/div[2]/p[1]/span[1]/a[#]/text()").extract() != "":
         #         footers = footers + response.xpath("//div/div[2]/p[1]/span[1]/a[[%s]]/text()").extract()
         #Give the extracted content row wise
-        for item in zip(titles,codeSamples,times,footers):
+        # for item in zip(titles,codeSamples,times,footers):
             #create a dictionary to store the scraped info
-            scraped_info = {
-                'title' : item[0],
-                'codeSample' : item[1],
-                'created_at' : item[2],
-                'footers' : item[3],
-            }
+        yield {
+            'title' : titles, #item[0],
+            'codeSample' : codeSamples, #item[1],
+            'created_at' : times, #item[2],
+            'footers' : footers, #item[3],
+        }
 
             #yield or give the scraped info to scrapy
-            yield scraped_info
+            # yield scraped_info
