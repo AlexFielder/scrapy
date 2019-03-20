@@ -43,7 +43,7 @@ class MtmbotSpider(scrapy.Spider):
         titles = response.css('.entry-header::text').extract()
         codeSamples = response.css('pre::text').extract()
         times = response.css('.date-header::text').extract()
-        # footers = response.css('.post-footers *::text').getall() #response.css('.post-footers::text').extract()
+        footers = response.css('.post-footers *::text').getall() #response.css('.post-footers::text').extract()
         #this gets the xpath text from the 'post footers' section:
         #response.xpath("//div/div[2]/p[1]/span[1]/a[1]/text()").extract()
         #loop to
@@ -52,11 +52,16 @@ class MtmbotSpider(scrapy.Spider):
         #response.css('.post-footers *::text').getall()
         #comments = response.css('.comments-content::text').extract()
         
-        footers = ""
+        # footers = ""
+        # footerscoll = response.xpath('//div/div[2]/p[1]/span[1]')
+        # print(footerscoll)
+        # for footer in footerscoll:
+        #     # if footer.xpath('//text()').extract() != "":
+        #     footers = footers + str(footer.xpath('//text()').extract())
 
-        for i in range(1, 20):
-            if response.xpath("//div/div[2]/p[1]/span[1]/a[" + str(i) + "]/text()").extract() != "":
-                footers = footers + response.xpath("//div/div[2]/p[1]/span[1]/a[" + str(i) + "]/text()").extract()
+        # for i in range(1, 20):
+        #     if response.xpath("//div/div[2]/p[1]/span[1]/a[#]/text()").extract() != "":
+        #         footers = footers + response.xpath("//div/div[2]/p[1]/span[1]/a[[%s]]/text()").extract()
         #Give the extracted content row wise
         for item in zip(titles,codeSamples,times,footers):
             #create a dictionary to store the scraped info
