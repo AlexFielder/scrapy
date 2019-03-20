@@ -115,3 +115,4 @@ dmypy.json
 
 # VSCode local History
 .history/
+.json
