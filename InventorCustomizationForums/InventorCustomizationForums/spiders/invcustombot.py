@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
+# starts here: http://https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=1
+# ends here: https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=171
 
 class InvcustombotSpider(scrapy.Spider):
     name = 'invcustombot'

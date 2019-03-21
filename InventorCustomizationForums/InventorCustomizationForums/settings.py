@@ -14,12 +14,15 @@ BOT_NAME = 'InventorCustomizationForums'
 SPIDER_MODULES = ['InventorCustomizationForums.spiders']
 NEWSPIDER_MODULE = 'InventorCustomizationForums.spiders'
 
+#Export as CSV Feed
+FEED_FORMAT = "json"
+FEED_URI = "InventorCustomizationForums.json" #csv"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'InventorCustomizationForums (+http://www.yourdomain.com)'
+USER_AGENT = 'InventorCustomizationForums (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False #True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
