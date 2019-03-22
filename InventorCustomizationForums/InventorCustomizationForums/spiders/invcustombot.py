@@ -14,12 +14,12 @@ class InvcustombotSpider(scrapy.Spider):
     start_urls = ['https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=1/']
 
     def start_requests(self):
-        for i in range(1, 171):
-            pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=' + str(i)
-            yield scrapy.Request(pageUrl, callback= self.parsePage) #, meta={'source_page_url': pageUrl}) #, method='GET')
-        #single page works okay:
-        # pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=1'
-        # yield scrapy.Request(pageUrl, callback= self.parsePage) #, method='GET')
+        # for i in range(1, 171):
+        #     pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=' + str(i)
+        #     yield scrapy.Request(pageUrl, callback= self.parsePage) #, meta={'source_page_url': pageUrl}) #, method='GET')
+        #debug single page works okay:
+        pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=1'
+        yield scrapy.Request(pageUrl, callback= self.parsePage) #, method='GET')
 
     def parsePage(self, response):
         for solvedSolutionUrl in response.xpath("//div[@class='MessageSubjectIcons ']/a/@href").extract():
