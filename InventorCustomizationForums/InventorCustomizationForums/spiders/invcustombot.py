@@ -36,7 +36,7 @@ class InvcustombotSpider(scrapy.Spider):
             'thread title' : response.css(".PageTitle *::text").extract_first(),
             'thread created at' : response.css(".autodesk-reply-time span::attr(title)").extract_first(),
             'thread created by' : response.css(".UserName span::text").extract_first(),
-            'created at' : response.css("div[itemprop='acceptedAnswer'] div[class='lia-quilt-column-alley lia-quilt-column-alley-single'] .DateTime span::attr(title)").re(r"(?:\u200e)(.*)"), #response.css("div[itemprop='acceptedAnswer'] div[class='lia-quilt-column-alley lia-quilt-column-alley-single'] .DateTime span::attr(title)").extract(),
+            'solution created at' : response.css("div[itemprop='acceptedAnswer'] div[class='lia-quilt-column-alley lia-quilt-column-alley-single'] .DateTime span::attr(title)").re(r"(?:\u200e)(.*)"), #response.css("div[itemprop='acceptedAnswer'] div[class='lia-quilt-column-alley lia-quilt-column-alley-single'] .DateTime span::attr(title)").extract(),
             'solution Title' : response.css("div[itemprop='acceptedAnswer'] div[class='lia-message-subject'] *::text").re_first(r"(?:\n\s+)(.*)(?:\n\s+)"),
             'solution' : response.css("[itemprop='acceptedAnswer'] pre *::text").extract(),
             'author' : response.css("[itemprop='acceptedAnswer'] .UserName span *::text").extract_first(),
