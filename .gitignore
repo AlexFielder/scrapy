@@ -117,3 +117,4 @@ dmypy.json
 .history/
 .json
 ModTheMachine/modthemachine.json
+*.csv
