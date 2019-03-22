@@ -16,29 +16,14 @@ class InvcustombotSpider(scrapy.Spider):
     def start_requests(self):
         for i in range(1, 171):
             pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=' + str(i)
-            # print(pageUrl)
-            # yield pageUrl
             yield scrapy.Request(pageUrl, callback= self.parsePage) #, meta={'source_page_url': pageUrl}) #, method='GET')
         #single page works okay:
         # pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=1'
         # yield scrapy.Request(pageUrl, callback= self.parsePage) #, method='GET')
 
     def parsePage(self, response):
-        #icon links structured like this:
-            #//*[@id="messageList_solved-posts"]/div/table/tbody/tr[1]/td[2]/div/div[1]/div/div/a
-            #//*[@id="messageList_solved-posts"]/div/table/tbody/tr[2]/td[2]/div/div[1]/div/div/a
-            #//*[@id="messageList_solved-posts"]/div/table/tbody/tr[3]/td[2]/div/div[1]/div/div/a
-            #//*[@id="messageList_solved-posts"]/div/table/tbody/tr[30]/td[2]/div/div[1]/div/div/a
-            # for j in range(1, 30):
-            # solutionUrl = response.xpath('//*[@id="messageList_solved-posts"]/div/table/tbody/tr[' + str(j) + ']/td[2]/div/div[1]/div/div/a')
-            #//*[@id="messageList_solved-posts"]/div/table/tbody/tr[1]/td[2]/div/div[1]/div/div/a
-            # solutionUrlDiv = response.css('//*[@id="messageList_solved-posts"]/div/table/tbody/tr[' + str(j) + ']/td[2]/div/div[1]/div/div/a').extract()
-            # print(solutionUrl)
-            for solvedSolutionUrl in response.xpath("//div[@class='MessageSubjectIcons ']/a/@href").extract():
-                # print(entry)
-                yield scrapy.Request(solvedSolutionUrl, dont_filter=True, callback = self.parseSolutionUrl, meta={'source_page_url': response.url})
-            #         response.css('').get()
-            # yield scrapy.Request(url=url, dont_filter=True, callback=self.parse)
+        for solvedSolutionUrl in response.xpath("//div[@class='MessageSubjectIcons ']/a/@href").extract():
+            yield scrapy.Request(solvedSolutionUrl, dont_filter=True, callback = self.parseSolutionUrl, meta={'source_page_url': response.url})
 
     def parseSolutionUrl(self, response):
         #need to figure out how to get the div that this is part of: itemprop="acceptedAnswer"
