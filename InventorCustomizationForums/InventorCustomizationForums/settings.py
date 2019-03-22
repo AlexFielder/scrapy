@@ -17,7 +17,7 @@ NEWSPIDER_MODULE = 'InventorCustomizationForums.spiders'
 #Export as CSV Feed
 FEED_FORMAT = "json"
 # FEED_FORMAT = "csv"
-FEED_URI = "InventorCustomizationForums.json" #csv"
+FEED_URI = "InventorCustomizationSolutions.json" #csv"
 # FEED_URI = "InventorCustomizationForums.csv" #csv"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

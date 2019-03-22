@@ -115,6 +115,6 @@ dmypy.json
 
 # VSCode local History
 .history/
-.json
+*.json
 ModTheMachine/modthemachine.json
 *.csv
