@@ -48,9 +48,9 @@ class InvcustombotSpider(scrapy.Spider):
         # print(solutionDiv)
         yield {
             'url' : response.url,
-            'thread title' : response.css(".PageTitle *::text").extract_first(), #
+            'thread title' : response.css(".PageTitle *::text").extract_first(),
             'created at' : response.css("div[itemprop='acceptedAnswer'] div[class='lia-quilt-column-alley lia-quilt-column-alley-single'] .DateTime span::attr(title)").extract(),
-            'solution Title' : response.css("div[itemprop='acceptedAnswer'] div[class='lia-message-subject'] *::text").extract_first(),
+            'solution Title' : response.css("div[itemprop='acceptedAnswer'] div[class='lia-message-subject'] *::text").re_first(r"(?:\n\s+)(.*)(?:\n\s+)"),
             'solution' : response.css("[itemprop='acceptedAnswer'] pre *::text").extract(),
             'author' : response.css("[itemprop='acceptedAnswer'] .UserName span *::text").extract_first(),
             'solutions source page url' : response.meta.get('source_page_url')
