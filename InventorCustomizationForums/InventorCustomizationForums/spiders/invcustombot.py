@@ -18,7 +18,7 @@ class InvcustombotSpider(scrapy.Spider):
             pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=' + str(i)
             # print(pageUrl)
             # yield pageUrl
-            yield scrapy.Request(pageUrl, callback= self.parsePage) #, method='GET')
+            yield scrapy.Request(pageUrl, callback= self.parsePage) #, meta={'source_page_url': pageUrl}) #, method='GET')
         #single page works okay:
         # pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=1'
         # yield scrapy.Request(pageUrl, callback= self.parsePage) #, method='GET')
@@ -36,7 +36,7 @@ class InvcustombotSpider(scrapy.Spider):
             # print(solutionUrl)
             for solvedSolutionUrl in response.xpath("//div[@class='MessageSubjectIcons ']/a/@href").extract():
                 # print(entry)
-                yield scrapy.Request(solvedSolutionUrl, dont_filter=True, callback = self.parseSolutionUrl)
+                yield scrapy.Request(solvedSolutionUrl, dont_filter=True, callback = self.parseSolutionUrl, meta={'source_page_url': response.url})
             #         response.css('').get()
             # yield scrapy.Request(url=url, dont_filter=True, callback=self.parse)
 
@@ -47,9 +47,12 @@ class InvcustombotSpider(scrapy.Spider):
         
         # print(solutionDiv)
         yield {
+            'url' : response.url,
+            'thread title' : response.css(".PageTitle *::text").extract_first(), #
             'created at' : response.css("div[itemprop='acceptedAnswer'] div[class='lia-quilt-column-alley lia-quilt-column-alley-single'] .DateTime span::attr(title)").extract(),
             'solution Title' : response.css("div[itemprop='acceptedAnswer'] div[class='lia-message-subject'] *::text").extract_first(),
             'solution' : response.css("[itemprop='acceptedAnswer'] pre *::text").extract(),
             'author' : response.css("[itemprop='acceptedAnswer'] .UserName span *::text").extract_first(),
+            'solutions source page url' : response.meta.get('source_page_url')
             #'tags' : solutionDiv.xpath(''), #
         }
