@@ -14,12 +14,29 @@ class InvcustombotSpider(scrapy.Spider):
     start_urls = ['https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=1/']
 
     def start_requests(self):
-        for i in range(1, 171):
-            pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=' + str(i)
-            yield scrapy.Request(pageUrl, callback= self.parsePage) #, meta={'source_page_url': pageUrl}) #, method='GET')
+        url = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=1'
+        # item = "0"
+        item = BaseUrl()
+        item.totalPages = 0
+        request = scrapy.Request(url=url, callback=self.getTotals, meta={'item': item})
+        # request.meta['item'] = item
+        # yield request
+        newItem = BaseUrl()
+        newItem = request.meta['item']
+        print("pagesTotal :" + str(newItem.totalPages)) #str(item))
+        # for i in range(1, 171):
+        #     pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=' + str(i)
+        #     yield scrapy.Request(pageUrl, callback= self.parsePage) #, meta={'source_page_url': pageUrl}) #, method='GET')
         #debug single page works okay:
-        # pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=1'
-        # yield scrapy.Request(pageUrl, callback= self.parsePage) #, method='GET')
+        pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=1'
+        yield scrapy.Request(pageUrl, callback= self.parsePage) #, method='GET')
+
+    def getTotals(self, response):
+        print("total pages: " + response.css('.lia-paging-page-last a::text').extract_first())
+        item = response.meta['item']
+        item.totalPages = int(response.css('.lia-paging-page-last a::text').extract_first())
+        # print("pagesTotal :" + item['pagesTotal'])
+        yield item
 
     def parsePage(self, response):
         for solvedSolutionUrl in response.xpath("//div[@class='MessageSubjectIcons ']/a/@href").extract():
@@ -43,3 +60,16 @@ class InvcustombotSpider(scrapy.Spider):
             'solutions source page url' : response.meta.get('source_page_url')
             #'tags' : solutionDiv.xpath(''), #
         }
+
+class BaseUrl:
+
+    def __iter__(self):
+        self.a = 1
+        return self
+
+    def __next__(self):
+        x = self.a
+        self.a += 1
+        return x
+    totalPages = 0
+    
