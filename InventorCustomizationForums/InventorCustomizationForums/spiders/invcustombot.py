@@ -16,20 +16,20 @@ class InvcustombotSpider(scrapy.Spider):
     def start_requests(self):
         url = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=1'
         # item = "0"
-        item = BaseUrl()
-        item.totalPages = 0
-        request = scrapy.Request(url=url, callback=self.getTotals, meta={'item': item})
+        # item = BaseUrl()
+        # item.totalPages = 0
+        # request = scrapy.Request(url=url, callback=self.getTotals, meta={'item': item})
         # request.meta['item'] = item
         # yield request
-        newItem = BaseUrl()
-        newItem = request.meta['item']
-        print("pagesTotal :" + str(newItem.totalPages)) #str(item))
-        # for i in range(1, 171):
-        #     pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=' + str(i)
-        #     yield scrapy.Request(pageUrl, callback= self.parsePage) #, meta={'source_page_url': pageUrl}) #, method='GET')
+        # newItem = BaseUrl()
+        # newItem = request.meta['item']
+        # print("pagesTotal :" + str(newItem.totalPages)) #str(item))
+        for i in range(1, 171):
+            pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=' + str(i)
+            yield scrapy.Request(pageUrl, callback= self.parsePage) #, meta={'source_page_url': pageUrl}) #, method='GET')
         #debug single page works okay:
-        pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=1'
-        yield scrapy.Request(pageUrl, callback= self.parsePage) #, method='GET')
+        # pageUrl = 'https://forums.autodesk.com/t5/inventor-customization/bd-p/120?solved-posts-page=1'
+        # yield scrapy.Request(pageUrl, callback= self.parsePage) #, method='GET')
 
     def getTotals(self, response):
         print("total pages: " + response.css('.lia-paging-page-last a::text').extract_first())
