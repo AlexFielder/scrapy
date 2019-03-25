@@ -14,12 +14,15 @@ BOT_NAME = 'AutoCADLISPCustomizationForums'
 SPIDER_MODULES = ['AutoCADLISPCustomizationForums.spiders']
 NEWSPIDER_MODULE = 'AutoCADLISPCustomizationForums.spiders'
 
+FEED_FORMAT = "json"
+FEED_URI = "AutoCADCustomizationLISPSolutions.json"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
+USER_AGENT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)' # 'InventorCustomizationForums (+http://www.yourdomain.com)'
 #USER_AGENT = 'AutoCADLISPCustomizationForums (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False #True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
