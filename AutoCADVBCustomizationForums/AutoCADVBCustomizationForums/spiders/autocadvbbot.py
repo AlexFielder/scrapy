@@ -4,16 +4,16 @@ import scrapy
 
 class AutocadvbbotSpider(scrapy.Spider):
     name = 'autocadvbbot'
-    allowed_domains = ['https://forums.autodesk.com/t5/visual-basic-customization/bd-p/33?solved-posts-page=1']
-    start_urls = ['http://https://forums.autodesk.com/t5/visual-basic-customization/bd-p/33?solved-posts-page=1/']
+    #allowed_domains = ['https://forums.autodesk.com/t5/visual-basic-customization/bd-p/33?solved-posts-page=1']
+    start_urls = ['https://forums.autodesk.com/t5/visual-basic-customization/bd-p/33?solved-posts-page=1/']
 
     def start_requests(self):
-        for i in range(1, 115):
-            pageUrl = 'https://forums.autodesk.com/t5/net/bd-p/152?solved-posts-page=' + str(i)
-            yield scrapy.Request(pageUrl, callback= self.parsePage)
+        # for i in range(1, 115):
+        #     pageUrl = 'https://forums.autodesk.com/t5/visual-basic-customization/bd-p/33?solved-posts-page=' + str(i)
+        #     yield scrapy.Request(pageUrl, callback= self.parsePage)
         #debug single page works okay:
-        # pageUrl = 'https://forums.autodesk.com/t5/net/bd-p/152?solved-posts-page=1'
-        # yield scrapy.Request(pageUrl, callback= self.parsePage) #, method='GET')
+        pageUrl = 'https://forums.autodesk.com/t5/visual-basic-customization/bd-p/33?solved-posts-page=1'
+        yield scrapy.Request(pageUrl, callback= self.parsePage) #, method='GET')
 
     def parsePage(self, response):
         for solvedSolutionUrl in response.xpath("//div[@class='MessageSubjectIcons ']/a/@href").extract():
