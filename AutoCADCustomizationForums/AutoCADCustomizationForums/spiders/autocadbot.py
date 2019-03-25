@@ -8,7 +8,7 @@ class AutocaddotnetbotSpider(scrapy.Spider):
     start_urls = ['https://forums.autodesk.com/t5/net/bd-p/152?solved-posts-page=115/']
 
     def start_requests(self):
-        for i in range(1, 171):
+        for i in range(1, 115):
             pageUrl = 'https://forums.autodesk.com/t5/net/bd-p/152?solved-posts-page=' + str(i)
             yield scrapy.Request(pageUrl, callback= self.parsePage)
         #debug single page works okay:
