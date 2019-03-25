@@ -8,12 +8,12 @@ class AutocadlispbotSpider(scrapy.Spider):
     start_urls = ['https://forums.autodesk.com/t5/visual-lisp-autolisp-and-general/bd-p/130?solved-posts-page=1/']
 
     def start_requests(self):
-        # for i in range(1, 190):
-        #     pageUrl = 'https://forums.autodesk.com/t5/visual-lisp-autolisp-and-general/bd-p/130?solved-posts-page=' + str(i)
-        #     yield scrapy.Request(pageUrl, callback= self.parsePage)
+        for i in range(1, 190):
+            pageUrl = 'https://forums.autodesk.com/t5/visual-lisp-autolisp-and-general/bd-p/130?solved-posts-page=' + str(i)
+            yield scrapy.Request(pageUrl, callback= self.parsePage)
         #debug single page works okay:
-        pageUrl = 'https://forums.autodesk.com/t5/visual-lisp-autolisp-and-general/bd-p/130?solved-posts-page=1'
-        yield scrapy.Request(pageUrl, callback= self.parsePage) #, method='GET')
+        # pageUrl = 'https://forums.autodesk.com/t5/visual-lisp-autolisp-and-general/bd-p/130?solved-posts-page=1'
+        # yield scrapy.Request(pageUrl, callback= self.parsePage) #, method='GET')
 
     def parsePage(self, response):
         for solvedSolutionUrl in response.xpath("//div[@class='MessageSubjectIcons ']/a/@href").extract():
