@@ -3,3 +3,8 @@ https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22?solved-posts-p
 https://forums.autodesk.com/t5/navisworks-api/bd-p/600?solved-posts-page=9
 https://forums.autodesk.com/t5/vault-customization/bd-p/301?solved-posts-page=26
 https://forums.autodesk.com/t5/revit-api-forum/bd-p/160?solved-posts-page=104
+https://forums.autodesk.com/t5/nastran-forum/bd-p/97?solved-posts-page=3
+https://forums.autodesk.com/t5/nastran-in-cad-forum/bd-p/75?solved-posts-page=22
+http://forums.augi.com/forumdisplay.php?215-Dot-Net-API
+
+
