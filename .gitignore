@@ -118,3 +118,5 @@ dmypy.json
 *.json
 ModTheMachine/modthemachine.json
 *.csv
+
+*.bak
