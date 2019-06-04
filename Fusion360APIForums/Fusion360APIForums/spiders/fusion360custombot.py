@@ -1,20 +1,14 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
-# starts here: https://forums.autodesk.com/t5/vault-customization/bd-p/301?solved-posts-page=1
-# ends here: https://forums.autodesk.com/t5/vault-customization/bd-p/301?solved-posts-page=28
 
-#xpath to solution titles: //*[contains(concat( " ", @class, " " ), concat( " ", "MessageSubject", " " ))]
-#xpath to solution post: //*[contains(concat( " ", @class, " " ), concat( " ", "lia-accepted-solution", " " ))]
-#xpath to solution code: //pre
-
-class VaultcustombotSpider(scrapy.Spider):
-    name = 'vaultcustombot'
+class Fusion360custombotSpider(scrapy.Spider):
+    name = 'fusion360custombot'
     # allowed_domains = ['https://forums.autodesk.com/']
-    start_urls = ['https://forums.autodesk.com/t5/vault-customization/bd-p/301?solved-posts-page=1/']
+    start_urls = ['https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22?solved-posts-page=1/']
 
     def start_requests(self):
-        url = 'https://forums.autodesk.com/t5/vault-customization/bd-p/301?solved-posts-page=1'
+        url = 'https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22?solved-posts-page=1'
         # item = "0"
         # item = BaseUrl()
         # item.totalPages = 0
@@ -24,11 +18,11 @@ class VaultcustombotSpider(scrapy.Spider):
         # newItem = BaseUrl()
         # newItem = request.meta['item']
         # print("pagesTotal :" + str(newItem.totalPages)) #str(item))
-        for i in range(1, 28):
-            pageUrl = 'https://forums.autodesk.com/t5/vault-customization/bd-p/301?solved-posts-page=' + str(i)
+        for i in range(1, 24):
+            pageUrl = 'https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22?solved-posts-page=' + str(i)
             yield scrapy.Request(pageUrl, callback= self.parsePage) #, meta={'source_page_url': pageUrl}) #, method='GET')
         #debug single page works okay:
-        # pageUrl = 'https://forums.autodesk.com/t5/vault-customization/bd-p/301?solved-posts-page=1'
+        # pageUrl = 'https://forums.autodesk.com/t5/fusion-360-api-and-scripts/bd-p/22?solved-posts-page=1'
         # yield scrapy.Request(pageUrl, callback= self.parsePage) #, method='GET')
 
     def getTotals(self, response):
