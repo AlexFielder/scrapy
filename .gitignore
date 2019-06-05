@@ -120,3 +120,4 @@ ModTheMachine/modthemachine.json
 *.csv
 
 *.bak
+*.db3
